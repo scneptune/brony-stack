@@ -1,0 +1,35 @@
+{
+  "name": "content-catalog-client",
+  "version": "0.0.1",
+  "description": "A front-end facing client for consuming the api of the content catelog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "scss",
+    "content-catelog",
+    "awesomenesstv"
+  ],
+  "author": "scneptune (stephenn@awesomenesstv.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.5.1",
+    "browser-sync": "^2.11.1",
+    "chai": "^3.5.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-shell": "^0.5.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.2",
+    "gulp-util": "^3.0.7",
+    "mocha": "^2.4.5"
+  }
+}
