@@ -4,7 +4,7 @@ var app, base, concat, directory, gulp,
     uglify, imagemin, minifyCSS, del,
     browserSync, autoprefixer, gulpSequence,
     shell, sourceMaps, plumber,
-    babel, eslint, eslintOptions;
+    babel, eslint, eslintOptions, mochaTest;
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -21,6 +21,7 @@ sourceMaps  = require('gulp-sourcemaps');
 imagemin    = require('gulp-imagemin');
 minifyCSS   = require('gulp-minify-css');
 browserSync = require('browser-sync');
+mochaTest   = require('gulp-mocha');
 autoprefixer = require('gulp-autoprefixer');
 gulpSequence = require('gulp-sequence').use(gulp);
 shell       = require('gulp-shell');
@@ -28,26 +29,26 @@ plumber     = require('gulp-plumber');
 
 //TODO: probably could move this out to a .eslintrtc file.
 eslintOptions = {
-      extends: 'eslint:recommended',
-      env: {
-        browser: true,
-        mocha: true,
-        es6: true
-      },
-      fix: true,
-      rules: {
-        'prefer-template': 2,
-        'init-declarations': [2, 'always'],
-        'no-delete-var': 2,
-        'vars-on-top': 2,
-        'no-console': 0,
-        'no-undef': 0,
-        'no-implied-eval': 2,
-        'eqeqeq': 2,
-        'valid-jsdoc': [2, {requireParamDescription: false}],
-        'valid-typeof': 2,
-        'no-dupe-keys': 2
-      }
+  extends: 'eslint:recommended',
+  env: {
+    browser: true,
+    mocha: true,
+    es6: true
+  },
+  fix: true,
+  rules: {
+    'prefer-template': 2,
+    'init-declarations': [2, 'always'],
+    'no-delete-var': 2,
+    'vars-on-top': 2,
+    'no-console': 0,
+    'no-undef': 0,
+    'no-implied-eval': 2,
+    'eqeqeq': 2,
+    'valid-jsdoc': [2, {requireParamDescription: false}],
+    'valid-typeof': 2,
+    'no-dupe-keys': 2
+  }
 };
 
 
@@ -109,6 +110,14 @@ gulp.task('scripts-deploy', function() {
     return gulp.src(['src/javascripts/**/*.js'])
                 //prevent pipe breaking caused by errors from gulp plugins
                 .pipe(plumber())
+                // run through a es2015 babel sensitive lint
+                .pipe(eslint(eslintOptions))
+                //give us some formatted results in the console.
+                .pipe(eslint.format())
+                //babel precompilation
+                .pipe(babel({
+                  presets: ['es2015', 'react', 'stage-0']
+                }))
                 //this is the filename of the compressed version of our JS
                 .pipe(concat('client-app.js'))
                 //compress :D
@@ -200,6 +209,15 @@ gulp.task('html-deploy', function() {
 
 });
 
+gulp.task('tests', function () {
+  return gulp.src('tests/*')
+    .pipe(plumber())
+    .pipe(mochaTest({
+      ui: 'bdd',
+      reporter: 'nyan'
+    }))
+})
+
 //cleans our dist directory in case things got deleted
 gulp.task('clean', function() {
     return shell.task([
@@ -224,7 +242,7 @@ gulp.task('scaffold', function() {
 //  startup the web server,
 //  start up browserSync
 //  compress all scripts and SCSS files
-gulp.task('default', ['browserSync', 'scripts', 'styles'], function() {
+gulp.task('default', ['browserSync', 'tests', 'scripts', 'styles'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
     gulp.watch('src/javascripts/**', ['scripts']);
     gulp.watch('src/stylesheets/**', ['styles']);

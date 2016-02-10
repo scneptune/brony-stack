@@ -1,7 +1,7 @@
 {
-  "name": "content-catalog-client",
+  "name": "brony-stack",
   "version": "0.0.1",
-  "description": "A front-end facing client for consuming the api of the content catelog",
+  "description": "A front-end facing client for consuming the apis",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,6 +30,7 @@
     "gulp-eslint": "^1.1.1",
     "gulp-imagemin": "^2.4.0",
     "gulp-minify-css": "^1.2.3",
+    "gulp-mocha": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.2.0",
     "gulp-sequence": "^0.4.4",
