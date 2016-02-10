@@ -15,12 +15,12 @@
 
 ### How do we get it running?
 
-1) install `node` first and foremost.
-2) check into this directory and run `npm install` (this should grab all you dependency needs)
-3) create a `.env` file with the line `SERVER_ENVIROMENT = "develop" ` or `SERVER_ENVIROMENT = "production"` depending on your build status
-4) run the express server via `node index.js`
-5) start up your gulp instance in a new window by first installing gulp globally via `npm install gulp -g` and then `gulp` (`gulp` will run the default development processes needed for compilation.
-6) when you are ready to ship a deployment build, switch out the SERVER_ENVIROMENT env variable and run `gulp deploy`. 
+1. install `node` first and foremost.
+2. check into this directory and run `npm install` (this should grab all you dependency needs)
+3. create a `.env` file with the line `SERVER_ENVIROMENT = "develop" ` or `SERVER_ENVIROMENT = "production"` depending on your build status
+4. run the express server via `node index.js`
+5. start up your gulp instance in a new window by first installing gulp globally via `npm install gulp -g` and then `gulp` (`gulp` will run the default development processes needed for compilation).
+6. when you are ready to ship a deployment build, switch out the SERVER_ENVIROMENT env variable and run `gulp deploy`. 
 
 --------------
 
