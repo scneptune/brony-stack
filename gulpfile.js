@@ -8,6 +8,8 @@ var app, base, concat, directory, gulp,
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
+require('dotenv').config();
+
 //load all of our dependencies
 //add more here if you want to include more libraries
 gulp        = require('gulp');
@@ -54,7 +56,7 @@ eslintOptions = {
 
 gulp.task('browserSync', function() {
     browserSync({
-        proxy: "localhost:9000",
+        proxy: "localhost:" + (process.env.SERVER_PORT || 9000),
         options: {
             reloadDelay: 250
         },
@@ -69,7 +71,11 @@ gulp.task('images', function(tmp) {
         //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
         .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
-        .pipe(gulp.dest('precompiled/images'));
+        .pipe(gulp.dest('src/precompiled/images'));
+
+    gulp.src(['!src/images/*.jpg', '!src/images/*.png', 'src/images/*.*'])
+        .pipe(plumber())
+        .pipe(gulp.dest('src/precompiled/images'));
 });
 
 //compressing images & handle SVG files
@@ -244,7 +250,8 @@ gulp.task('scaffold', function() {
 //  compress all scripts and SCSS files
 gulp.task('default', ['browserSync', 'tests', 'scripts', 'styles'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
-    gulp.watch('src/javascripts/**', ['scripts']);
+    gulp.watch('src/javascripts/**', ['scripts', 'tests']);
+    gulp.watch('tests/**', ['tests']);
     gulp.watch('src/stylesheets/**', ['styles']);
     gulp.watch('src/images/**', ['images']);
     gulp.watch('src/app/views/*.html', ['html']);
