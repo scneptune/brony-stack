@@ -35,7 +35,8 @@ router = require(srcRootPath + 'app/routes');
 app.set('views', srcRootPath + "app/views")
 app.set('view engine', 'html');
 
-app.use(serveFavicon(rootAssetPath + 'images/favicon.ico'));
+//don't uncomment until your src/precompiled/images/ dir exists.
+// app.use(serveFavicon(rootAssetPath + 'images/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
