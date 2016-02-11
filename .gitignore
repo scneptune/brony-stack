@@ -1,4 +1,5 @@
 src/precompiled/*
+precompiled/*
 node_modules/*
 *.DS_Store
 .env
