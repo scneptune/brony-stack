@@ -4,7 +4,6 @@ var express, app, env, cookieParser,
 
 require('dotenv').config();
 
-console.log(process.env);
 env = (process.env.SERVER_ENVIRONMENT ? process.env.SERVER_ENVIRONMENT : "develop");
 
 //TODO: refactor this out with the path.js lib
