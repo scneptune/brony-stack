@@ -80,7 +80,7 @@ gulp.task('images', function(tmp) {
 
 //compressing images & handle SVG files
 gulp.task('images-deploy', function() {
-    gulp.src(['src/precompiled/images/**/*', '!precompiled/images/README'])
+    gulp.src(['src/precompiled/images/**/*', '!src/precompiled/images/README'])
         //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
         .pipe(gulp.dest('dist/images'));
