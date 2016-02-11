@@ -7,15 +7,14 @@ describe('Sample Testing block', function () {
       expect("To be").to.not.equal("Not To Be");
     });
     it('For My Next Trick, A Joke', function () {
-      function lightbulbEngineers (count) {
+      function howManyEngineersDoesItTakeToScrewInALightbulb (count) {
         return (count >= 3 ? true : false);
       }
-      console.log("How many engineers does it take to screw in a lightbulb ?");
-      var one = lightbulbEngineers(1),
-          two = lightbulbEngineers(2),
-          three = lightbulbEngineers(3);
+      var one = howManyEngineersDoesItTakeToScrewInALightbulb(1),
+          two = howManyEngineersDoesItTakeToScrewInALightbulb(2),
+          three = howManyEngineersDoesItTakeToScrewInALightbulb(3);
         expect(one).to.be.false;
-        expect(two).to.be.false;
+        expect(two).to.not.be.true;
         expect(three).to.be.true;
     })
   })
